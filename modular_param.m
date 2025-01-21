@@ -47,3 +47,38 @@ function latticeCheck(point, periods : tol := 1e-4)
 	
 	return good;
 end function;
+
+function torsBound(basis, primbd)
+	ps := PrimesInInterval(3, primbd);
+	level := Level(basis[1]);
+	S := CuspForms(level, 2);
+	Sv, phi := VectorSpace(S);
+	psi := Inverse(phi);
+	V := sub<Sv | [psi(b) : b in basis]>;
+	print("Converter computed");
+	
+	order := -1;
+	for p in ps do
+		print(p);
+		if (level mod p) eq 0 then
+			continue;
+		end if;
+		
+		img_basis := [Coordinates(V, psi(HeckeOperator(p, b))) : b in basis];
+		hecke_mat := Matrix(Integers(), #basis, #basis, img_basis);
+		f := CharacteristicPolynomial(hecke_mat);
+		bd := Evaluate(f, p + 1);
+		
+		if order eq -1 then
+			order := bd;
+		else
+			order := GCD(order, bd);
+		end if;
+		
+		if order eq 1 then
+			break;
+		end if;
+
+	end for;
+	return order;
+end function;
