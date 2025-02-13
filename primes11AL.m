@@ -68,6 +68,8 @@ primes := primes cat [ 11, 59, 83, 107, 131, 179, 227, 251, 347, 419, 443, 467, 
 
 36011, 37691, 39779, 41051, 41411, 42899, 44651, 48179, 49139, 49451 ];
 
+Sort(~primes);
+
 print(#primes);
 
 no_ss := [];
@@ -99,6 +101,8 @@ for p in primes do
 		for ssj in fp_rts do
 			tot := tot * (rt - ssj);
 		end for;
+
+		tot := tot^2;
 
 		err := tot - Frobenius(tot);
 		if err ne 0 then
