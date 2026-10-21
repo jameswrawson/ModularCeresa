@@ -20,11 +20,11 @@ tau2 := (117 + Sqrt(-1))/1369;
 tau3 := (398 + ((-1 + Sqrt(-7))/2))/1369;
 tau4 := (206 + Sqrt(-3))/1369;
 tau5 := (334 + 2*Sqrt(-1))/1369;
-ints1 := modularIntegral(fs, tau1 : tol := 1e-5);
-ints2 := modularIntegral(fs, tau2 : tol := 1e-5);
-ints3 := modularIntegral(fs, tau3 : tol := 1e-5);
-ints4 := modularIntegral(fs, tau4 : tol := 1e-5);
-ints5 := modularIntegral(fs, tau5 : tol := 1e-5);
+ints1 := modularIntegral(fs, tau1 : tol := 1e-6);
+ints2 := modularIntegral(fs, tau2 : tol := 1e-6);
+ints3 := modularIntegral(fs, tau3 : tol := 1e-6);
+ints4 := modularIntegral(fs, tau4 : tol := 1e-6);
+ints5 := modularIntegral(fs, tau5 : tol := 1e-6);
 
 //Torsion bound for the isogeny factor of J0 corresponding to the above subspace
 print(torsBound(fs, 20));
@@ -33,6 +33,6 @@ print(torsBound(fs, 20));
 pt := [1*2*(152*ints1[1] + 699*ints2[1] + 1164*ints3[1] + 12*ints4[1] + 6*ints5[1])];
 print(pt);
 A := ModularAbelianVariety("1369B");
-Ps := Periods(A, 4463);
+Ps := Periods(A, 5042);
 
-print(latticeCheck(pt, Ps : tol := 1e-1));
+print(latticeCheck(pt, Ps : tol := 5e-3));
